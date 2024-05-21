@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 5rem;
+    border-radius: 20px;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 5px 30px 5px rgba(12,12,12,0.7);
+    -webkit-box-shadow: 0px 5px 30px 5px rgba(12,12,12,0.7);
+    -moz-box-shadow: 0px 5px 30px 5px rgba(12,12,12,0.7);
+}
+.logo {
+    float: inline-end;
+    width: 200px; height: 200px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color: #f2f2f2;
+}
+
+input {
+    
+    cursor: pointer;
+    outline: 0;
+    background-color: #9CAFAA;
+    border-color: #9CAFAA;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    :hover {
+        color: #fff;
+        background-color: #9CAFAA;
+        border-color: #9CAFAA;
+    }
+
+}
+
+.SELESAI {
+    
+    font: bold;
+    cursor: pointer;
+    outline: 0;
+    background-color: #A5DD9B;
+    border-color: #A5DD9B;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    :hover {
+        color: #fff;
+        background-color: #A5DD9B;
+        border-color: #A5DD9B;
+    }
+
+}

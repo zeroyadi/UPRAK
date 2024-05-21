@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struk Pembayaran</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <h1>{{ namaToko }}</h1>
+        <img :src="logo" alt="Logo Toko" class="logo">
+        <p>No. data: <input type="text" v-model="noData"></p>
+        <p>Pelanggan: <input type="text" v-model="pelanggan"></p>
+        <p>Tanggal: <input type="date" v-model="tanggal"></p>
+        <p style="color: red;">Total Pembayaran: {{ totalPembayaran }}</p>
+        <hr>
+        <p>Kode Barang: <input type="text" v-model="kodeBarang"></p>
+        <p>Nama Barang: <input type="text" v-model="namaBarang"></p>
+        <p>Quantity: <input type="number" v-model.number="quantity" value="1"></p>
+        <button @click="addItem">Tambah Barang</button>
+        <button @click="lihatBarang">Lihat Barang</button>
+        <hr>
+        <div v-if="showBarang">
+            <h3>Daftar Barang:</h3>
+            <ul>
+                <li v-for="barang in daftarBarang">
+                    {{ barang.nama }} - Rp{{ barang.harga }}
+                </li>
+            </ul>
+        </div>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Harga Satuan</th>
+                    <th>Qty</th>
+                    <th>Jumlah</th>
+                    <th>Opsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in items" :key="index">
+                    <td>{{ item.kode }}</td>
+                    <td>{{ item.nama }}</td>
+                    <td>{{ item.harga }}</td>
+                    <td>{{ item.qty }}</td>
+                    <td>{{ item.subtotal }}</td>
+                    <td><button @click="removeItem(index)">Hapus</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <p>Sub Total: {{ subTotal }}</p>
+        <p>Diskon: <input type="number" v-model.number="diskonPercentage" min="0"> %</p>
+        <p>Total Harga: {{ totalHarga }}</p>
+        <p>Bayar: <input type="number" v-model.number="bayar" value="0"></p>
+        <p>Kembalian: {{ kembalian }}</p>
+        <hr>
+        <button class="SELESAI" @click="selesai">SELESAI</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                namaToko: "Welcome to Irsyad hidayat Store",
+                logo: "assets/logo.png",
+                noData: "",
+                pelanggan: "",
+                tanggal: "",
+                kodeBarang: "",
+                namaBarang: "",
+                quantity: 1,
+                items: [],
+                diskonPercentage: 0,
+                bayar: 0,
+                showBarang: false,
+                daftarBarang: [
+                    { nama: 'Hoodie', harga: 10000 },
+                    { nama: 'Sepatu', harga: 10000 }
+                ],
+            },
+            computed: {
+                totalPembayaran() {
+                    return this.items.reduce((acc, item) => acc + item.subtotal, 0);
+                },
+                subTotal() {
+                    let diskonAmount = (this.totalPembayaran * this.diskonPercentage) / 100;
+                    return this.totalPembayaran - diskonAmount;
+                },
+                totalHarga() {
+                    return Math.max(this.subTotal, 0);
+                },
+                kembalian() {
+                    return Math.max(this.bayar - this.totalHarga, 0);
+                }
+            },
+            methods: {
+                addItem() {
+                    let hargaSatuan = 10000; // Misalnya harga satuan barang adalah Rp10.000
+                    let jumlah = this.quantity * hargaSatuan;
+
+                    this.items.push({
+                        kode: this.kodeBarang,
+                        nama: this.namaBarang,
+                        harga: hargaSatuan,
+                        qty: this.quantity,
+                        subtotal: jumlah
+                    });
+                },
+                removeItem(index) {
+                    this.items.splice(index, 1);
+                },
+                selesai() {
+                    // Fungsi yang akan dipanggil saat tombol "SELESAI" ditekan
+                    alert("Transaksi selesai. Terima kasih!");
+                },
+                lihatBarang() {
+                    this.showBarang = true;
+                },
+            }
+        });
+    </script>
+</body>
+</html>
